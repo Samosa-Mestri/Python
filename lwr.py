@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def kernel(x,x_i,tau):
-  return np.exp(-np.sum(x-x_i)**2/(2*tau**2))
+  return np.exp(-np.sum((x-x_i)**2)/(2*tau**2))
 
 def lwr(x_query,X,y,tau):
   m = X.shape[0]
@@ -14,7 +14,7 @@ def lwr(x_query,X,y,tau):
   XTWX = X.T@W@X
 
   if np.linalg.det(XTWX) == 0:
-    theta = np.linalg.pinv(XTWX@X.T@W@y)
+    theta = np.linalg.pinv(XTWX)@X.T@W@y
   else:
     theta = np.linalg.inv(XTWX)@X.T@W@y
 
